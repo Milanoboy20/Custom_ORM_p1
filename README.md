@@ -47,6 +47,6 @@ the provided SQL Script, add some data(optional) and then run the test class.
 
 ## Contributors
 
-> Micheal Ord
+> Micheal Ord (Paired Programming partner for this Project)
 
 
