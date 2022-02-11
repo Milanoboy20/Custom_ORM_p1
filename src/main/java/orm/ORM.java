@@ -12,7 +12,7 @@ import java.util.List;
 public class ORM<E>  {
 
     private Class<E> entityClass;
-     Connection connect = ConnectionToDB.getConnection();
+    Connection connect = ConnectionToDB.getConnection();
 
     public ORM(Class<E> entityClass) throws SQLException, IOException {
         this.entityClass = entityClass;
@@ -41,25 +41,19 @@ public class ORM<E>  {
         }
         query.delete(query.length() - 4, query.length() - 1);
         query.append(";");
-//        System.out.println(query);
         String statement = query.toString();
-
 
         try {
             PreparedStatement ps         = connect.prepareStatement(statement);
             ResultSet res                = ps.executeQuery();
             ResultSetMetaData rsMetaData = res.getMetaData();
             int columns                  = rsMetaData.getColumnCount();
-//            System.out.println(columns);
 
             E ob = (E) cl.newInstance();
-//            System.out.println("Setting new instance object to insert data/values from DB ==== ");
-//            System.out.println(ob);
             while(res.next()) ob = generateData(res, rsMetaData, columns, ob);
-//            System.out.println("Data inserted");
             return  ob;
-
-        } catch (SQLException | InstantiationException e) {
+        }
+        catch (SQLException | InstantiationException e) {
             e.printStackTrace();
         }
         return null;
@@ -84,7 +78,6 @@ public class ORM<E>  {
                 query.append(f.getName()).append("=").append(id).append(";");
             }
         }
-//        System.out.println(query);
         String statement = query.toString();
 
         try {
@@ -92,13 +85,9 @@ public class ORM<E>  {
             ResultSet res                = ps.executeQuery();
             ResultSetMetaData rsMetaData = res.getMetaData();
             int columns                  = rsMetaData.getColumnCount();
-//            System.out.println(columns);
 
             E ob = (E) obj.getClass().newInstance();
-//            System.out.println("Setting new instance object to insert data/values from DB ==== ");
-//            System.out.println(ob);
             while(res.next()) ob = generateData(res, rsMetaData, columns, ob);
-//            System.out.println("Data inserted");
             return  ob;
         }
         catch (SQLException | InstantiationException e) {
@@ -115,7 +104,6 @@ public class ORM<E>  {
      */
     public List<E> selectAll(E obj){
         String query = "SELECT * FROM " + obj.getClass().getSimpleName() + ";";
-//        System.out.println(query);
 
         try {
             PreparedStatement ps      = connect.prepareStatement(query);
@@ -127,7 +115,6 @@ public class ORM<E>  {
             while (res.next()){
                 E newObj                   = (E) obj.getClass().newInstance();
                 newObj                     = generateData(res,resMeta,count,newObj);
-//                System.out.println(newObj);
                 allData.add(newObj);
             }
             return allData;
@@ -163,11 +150,9 @@ public class ORM<E>  {
         }
         query.deleteCharAt(query.length() - 1);
         String statement = query + ") RETURNING *;";
-//        System.out.println(statement);
 
         try {
             PreparedStatement ps = connect.prepareStatement(statement);
-//            System.out.println(statement);
 
             ResultSet res = ps.executeQuery();
             ResultSetMetaData resMeta = res.getMetaData();
@@ -209,7 +194,6 @@ public class ORM<E>  {
         }
 
         String statement = query.toString();
-//        System.out.println(statement);
 
         try {
             PreparedStatement ps      = connect.prepareStatement(statement);
@@ -249,22 +233,16 @@ public class ORM<E>  {
         }
         query.delete(query.length() - 4, query.length() - 1);
         query.append("RETURNING *;");
-//        System.out.println(query);
         String statement = query.toString();
-
 
         try {
             PreparedStatement ps         = connect.prepareStatement(statement);
             ResultSet res                = ps.executeQuery();
             ResultSetMetaData rsMetaData = res.getMetaData();
             int columns                  = rsMetaData.getColumnCount();
-//            System.out.println(columns);
 
             E ob = (E) cl.newInstance();
-//            System.out.println("Object to insert deleted data/values from DB ==== ");
-//            System.out.println(ob);
             while(res.next()) ob = generateData(res, rsMetaData, columns, ob);
-//            System.out.println("Deleted data");
             return  (E) ob;
         }
         catch (SQLException | InstantiationException | IllegalAccessException e) {
@@ -292,22 +270,16 @@ public class ORM<E>  {
                 query.append(f.getName().toLowerCase()).append("=").append(id);
             }
             query.append(" RETURNING *;");
-//            System.out.println(query);
             String statement = query.toString();
-
 
             try {
                 PreparedStatement ps         = connect.prepareStatement(statement);
                 ResultSet res                = ps.executeQuery();
                 ResultSetMetaData rsMetaData = res.getMetaData();
                 int columns                  = rsMetaData.getColumnCount();
-//                System.out.println(columns);
 
                 E ob = (E) entityClass.getClass().newInstance();
-//                System.out.println("Object to insert deleted data/values from DB ==== ");
-//                System.out.println(ob);
                 while(res.next()) ob = generateData(res, rsMetaData, columns, ob);
-//                System.out.println("Deleted data");
                 return ob;
             }
             catch (SQLException | InstantiationException | IllegalAccessException e) {
@@ -337,20 +309,11 @@ public class ORM<E>  {
                 if (f.getName().toLowerCase().equals(rsMetaData.getColumnName(i))){
                     switch (f.getType().getSimpleName()) {
                         case "String":
-//                            if (Objects.equals(res.getString(i), "")){
-//                                f.set(ob, "");
-//                            }else{
                                 f.set(ob, res.getString(i));
-//                            }
                             break;
 
                         case "int":
-//                            if (res.getInt(i) == 0){
-//                                f.set(ob, 0);
-//                            }
-//                            else {
                                 f.setInt(ob, res.getInt(i));
-//                            }
                             break;
 
                         case "boolean":{
@@ -359,20 +322,12 @@ public class ORM<E>  {
                         break;
 
                         case "double":
-//                            if (res.getDouble(i) == 0){
-//                                f.setDouble(ob, 0);
-//                            } else
                                 f.setDouble(ob, res.getDouble(i));
                             break;
 
                         case "long":
-//                            if (res.getLong(i) == 0){
-//                                f.setLong(ob, 0);
-//                            }
-//                            else{
                                 long dt = res.getLong(i);
                                 f.setLong(ob, dt);
-//                            }
                             break;
 
                         default:
