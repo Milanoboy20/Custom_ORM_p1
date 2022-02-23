@@ -35,7 +35,7 @@ connection.properties (with your endpoint, username and password) file to the re
 Check and change the url format in the utilities/ConnectionToDB to the appropriate url format.
 
 To Test the ORM with the available JUnit 5 Test folder. Create three tables in your RDBMS with 
-the provided SQL Script, add some data(optional) and then run the test class. 
+the provided SQL Script, add some dummy data and then run the test class. 
 
 
 
