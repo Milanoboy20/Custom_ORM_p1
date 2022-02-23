@@ -21,10 +21,9 @@ To create a custom object relational mapping (ORM) framework, written in Java, w
 * Add a connection.properties file to work with a specific endpoint
 * Can be added as a Maven local dependency to other projects
 
-To-do list:
+To-do/Future Implementations list:
 * Add Log4j to log transactions/operation performed with the Custom_ORM
 * Add support for basic transaction management (begin, commit, savepoint, rollback)
-* Add connection pooling to support multi-threaded applications
 * Add functionality to easily parse in RDBMS endpoint, url, username and password.
 
 ## Getting Started
