@@ -47,6 +47,6 @@ the provided SQL Script, add some dummy data and then run the test class.
 ## Contributors
 
 * Abdul Samad Sadat
-* Micheal Ord 
+* Micheal Ord https://github.com/1bubbainpa
 
 
