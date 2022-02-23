@@ -30,11 +30,11 @@ To-do/Future Implementations list:
 
 This ORM works with PostgreSQL statements.
 
-To use this Custom_ORM, first clone the repository. Open it in your prefered IDE and add a 
+* To use this Custom_ORM, first clone the repository. Open it in your prefered IDE and add a 
 connection.properties (with your endpoint, username and password) file to the resources folder.
-Check and change the url format in the utilities/ConnectionToDB to the appropriate url format.
+* Check and change the url format in the utilities/ConnectionToDB to the appropriate url format.
 
-To Test the ORM with the available JUnit 5 Test folder. Create three tables in your RDBMS with 
+* To Test the ORM with the available JUnit 5 Test folder. Create three tables in your RDBMS with 
 the provided SQL Script, add some dummy data and then run the test class. 
 
 
@@ -46,7 +46,7 @@ the provided SQL Script, add some dummy data and then run the test class.
 
 ## Contributors
 
-> Abdul Samad Sadat
-> Micheal Ord (Paired Programming partner for this Project)
+* Abdul Samad Sadat
+* Micheal Ord 
 
 
